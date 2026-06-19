@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "MiPrimerMVC/1.0.0": {
+        "runtime": {
+          "MiPrimerMVC.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MiPrimerMVC/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

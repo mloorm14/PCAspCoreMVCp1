@@ -1,0 +1,83 @@
+@model MiPrimerMVC.Models.Producto
+@{
+    ViewData["Title"] = "Registrar Nuevo Producto";
+}
+
+<div class="container mt-4" style="max-width: 700px;">
+    <h1>Registrar Nuevo Producto</h1>
+    <hr />
+
+    @*
+      asp-action    : el FormTagHelper genera action="/Producto/Create"
+      asp-antiforgery="true" : inyecta el campo oculto __RequestVerificationToken
+                               y la cookie correspondiente.
+      method="post" : asegura que los datos viajen en el cuerpo HTTP.
+    *@
+    <form asp-action="Create" asp-antiforgery="true" method="post">
+
+        <div class="mb-3">
+            @* asp-for lee [Display(Name="...")] del modelo para generar
+               el label y los atributos name/id del input. *@
+            <label asp-for="Nombre" class="form-label fw-bold"></label>
+            <input asp-for="Nombre" class="form-control"
+                   placeholder="Ej: Laptop Lenovo ThinkPad" />
+            @* asp-validation-for genera el span con data-valmsg-for
+               que jQuery Validation popula con los mensajes de error. *@
+            <span asp-validation-for="Nombre"
+                  class="text-danger small"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Descripcion" class="form-label fw-bold"></label>
+            <textarea asp-for="Descripcion" class="form-control"
+                      rows="3"
+                      placeholder="Descripcion del producto...">
+            </textarea>
+            <span asp-validation-for="Descripcion"
+                  class="text-danger small"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Precio" class="form-label fw-bold"></label>
+                <input asp-for="Precio" class="form-control"
+                       type="number" step="0.01" min="0.01"
+                       placeholder="0.00" />
+                <span asp-validation-for="Precio"
+                      class="text-danger small"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Stock" class="form-label fw-bold"></label>
+                <input asp-for="Stock" class="form-control"
+                       type="number" min="0"
+                       placeholder="0" />
+                <span asp-validation-for="Stock"
+                      class="text-danger small"></span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Categoria" class="form-label fw-bold"></label>
+            <input asp-for="Categoria" class="form-control"
+                   placeholder="Ej: Electronica" />
+            <span asp-validation-for="Categoria"
+                  class="text-danger small"></span>
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+            <button type="submit" class="btn btn-success px-4">
+                Guardar Producto
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                Cancelar
+            </a>
+        </div>
+
+    </form>
+</div>
+
+@* La seccion Scripts carga jQuery Validation + Unobtrusive Validation,
+   necesarios para la validacion en cliente (client-side). *@
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
